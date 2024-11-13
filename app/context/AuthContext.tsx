@@ -3,7 +3,7 @@
 import { createContext, ReactNode, useEffect, useState } from "react";
 
 // Admin test
-const admin = { email: "testpwa@exemple.com", password: "Yj$aHcI7%hXF2RiT" };
+const admin = { email: "test@abc.com", password: "pwa1234" };
 
 type AuthContextDataType = {
   authenticatedUser: { email: string; password: string } | null;
