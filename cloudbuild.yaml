@@ -1,0 +1,19 @@
+steps:
+  - name: "gcr.io/cloud-builders/docker"
+    id: Building docker image
+    args:
+      [
+        "build",
+        "-t",
+        "europe-west1-docker.pkg.dev/$PROJECT_ID/pwa-training-repo/helloworld:v1",
+        ".",
+      ]
+  - name: "gcr.io/cloud-builders/docker"
+    args:
+      [
+        "push",
+        "europe-west1-docker.pkg.dev/$PROJECT_ID/pwa-training-repo/helloworld:v1",
+      ]
+    id: Pushing the image to registry
+options:
+  logging: CLOUD_LOGGING_ONLY
