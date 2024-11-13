@@ -29,10 +29,7 @@ const AuthContextProvider = ({ children }: AuthContextProviderProps) => {
   const [isLoading, setIsLoading] = useState(true);
 
   const login = (email: string, password: string) => {
-    if (
-      window != undefined &&
-      window.localStorage.getItem("authenticatedUser")
-    ) {
+    if (window != undefined) {
       if (email === admin.email && password === admin.password) {
         window.localStorage.setItem("authenticatedUser", JSON.stringify(admin));
 
