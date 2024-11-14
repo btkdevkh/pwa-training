@@ -18,7 +18,6 @@ const geistMono = localFont({
 });
 
 const APP_NAME = "GreenMeteo";
-const APP_DEFAULT_TITLE = "GreenMeteo PWA App";
 const APP_TITLE_TEMPLATE = "%s - PWA App";
 const APP_DESCRIPTION = "Weather forcast app";
 
@@ -26,35 +25,21 @@ export const metadata: Metadata = {
   manifest: "/manifest.json",
   applicationName: APP_NAME,
   title: {
-    default: APP_DEFAULT_TITLE,
+    default: APP_NAME,
     template: APP_TITLE_TEMPLATE,
   },
   description: APP_DESCRIPTION,
   appleWebApp: {
     capable: true,
     statusBarStyle: "default",
-    title: APP_DEFAULT_TITLE,
-    // startUpImage: [],
+    title: APP_NAME,
   },
   formatDetection: {
     telephone: false,
   },
-  openGraph: {
-    type: "website",
-    siteName: APP_NAME,
-    title: {
-      default: APP_DEFAULT_TITLE,
-      template: APP_TITLE_TEMPLATE,
-    },
-    description: APP_DESCRIPTION,
-  },
-  twitter: {
-    card: "summary",
-    title: {
-      default: APP_DEFAULT_TITLE,
-      template: APP_TITLE_TEMPLATE,
-    },
-    description: APP_DESCRIPTION,
+  icons: {
+    shortcut: "/favicon.ico",
+    apple: [{ url: "/ios/180.png", sizes: "180x180" }],
   },
 };
 
