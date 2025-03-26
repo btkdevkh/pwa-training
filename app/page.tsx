@@ -21,31 +21,43 @@ const Home = () => {
   const [, setLongitude] = useState<number>(22);
 
   useEffect(() => {
-    getCurrentPosition().then(({ lat, lng }) => {
-      setLatitude(lat);
-      setLongitude(lng);
+    getCurrentPosition()
+      .then(({ lat, lng }) => {
+        setLatitude(lat);
+        setLongitude(lng);
 
-      getWeatherForcastPos(lat, lng).then(data => {
-        setWeatherForcast(data.openweatherpos);
+        getWeatherForcastPos(lat, lng)
+          .then((data) => {
+            setWeatherForcast(data.openweatherpos);
 
-        const formatMeteo5days = Object.entries(
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          data.openweather5days.list.reduce((acc: any, meteo: any) => {
-            const initDate = meteo.dt_txt.split(" ")[0];
-            if (!acc[initDate]) {
-              acc[initDate] = [];
+            if (!data.openweather5days) {
+              return setWeatherForcast5days([]);
             }
-            acc[initDate].push(meteo);
-            return acc;
-          }, {})
-        ).map(([, entries]) => ({
-          city: data.openweather5days.city,
-          days: entries,
-        }));
 
-        setWeatherForcast5days(formatMeteo5days);
+            const formatMeteo5days = Object.entries(
+              // eslint-disable-next-line @typescript-eslint/no-explicit-any
+              data.openweather5days.list.reduce((acc: any, meteo: any) => {
+                const initDate = meteo.dt_txt.split(" ")[0];
+                if (!acc[initDate]) {
+                  acc[initDate] = [];
+                }
+                acc[initDate].push(meteo);
+                return acc;
+              }, {})
+            ).map(([, entries]) => ({
+              city: data.openweather5days.city,
+              days: entries,
+            }));
+
+            setWeatherForcast5days(formatMeteo5days);
+          })
+          .catch((error) => {
+            console.error("Error getting weather forcast", error);
+          });
+      })
+      .catch((error) => {
+        console.error("Error getting current position", error);
       });
-    });
   }, []);
 
   // Redirect not authenticated user to "/login"
@@ -96,7 +108,7 @@ const Home = () => {
 
           <br />
 
-          <div className="grid sm:grid-cols-1 md:grid-cols-3 xl:grid-cols-6 gap-3">
+          <div className="grid sm:grid-cols-1 md:grid-cols-3 xl:grid-cols-5 gap-3">
             {weatherForcast5days &&
               weatherForcast5days.length > 0 &&
               // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -146,13 +158,13 @@ const getCurrentPosition = (): Promise<{
       reject(new Error("Geolocation is not supported by your browser"));
     } else {
       navigator.geolocation.getCurrentPosition(
-        position => {
+        (position) => {
           const lat = position.coords.latitude;
           const lng = position.coords.longitude;
 
           resolve({ lat, lng });
         },
-        error => {
+        (error) => {
           console.log("Error :", error);
           // reject(error);
 

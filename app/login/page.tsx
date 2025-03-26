@@ -10,12 +10,12 @@ const Login = () => {
   const { authenticatedUser, login } = useContext(AuthContext);
 
   const [formData, setFormData] = useState({
-    email: "",
-    password: "",
+    email: "test@abc.com",
+    password: "pwa1234",
   });
 
   const handleChangeInput = (e: ChangeEvent<HTMLInputElement>) => {
-    setFormData(o => ({
+    setFormData((o) => ({
       ...o,
       [e.target.name]: e.target.value,
     }));
@@ -32,6 +32,13 @@ const Login = () => {
       login(formData.email, formData.password);
     }
   };
+
+  // Login user on first render, (no authentified user needed)
+  useEffect(() => {
+    if (login) {
+      login(formData.email, formData.password);
+    }
+  }, []);
 
   // Redirect authenticated user to "/"
   useEffect(() => {

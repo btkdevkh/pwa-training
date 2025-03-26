@@ -8,7 +8,7 @@ const Navbar = () => {
   const { authenticatedUser, logout } = useContext(AuthContext);
 
   return (
-    <div className="navbar bg-base-100 container lg">
+    <div className="max-w-7xl mx-auto navbar bg-base-100">
       <div className="flex-1">
         <Link href="/" className="px-1 text-xl text-slate-600">
           GreenMétéo
@@ -37,7 +37,7 @@ const Navbar = () => {
           </svg>
         </Link>
 
-        {authenticatedUser && (
+        {!authenticatedUser && (
           <button
             className="btn btn-square btn-ghost"
             title="Déconnexion"

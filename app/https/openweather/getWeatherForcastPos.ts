@@ -6,6 +6,7 @@ const getWeatherForcastPos = async (lat: number, lng: number) => {
     return data;
   } catch (err) {
     console.log("Error :", err);
+    return { error: err };
   }
 };
 
