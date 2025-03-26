@@ -12,9 +12,9 @@ const About = () => {
       <br />
 
       <p>
-        C'est une test app sur la librarie Serwist avant le développement d'une
-        application en PWA pour une client de mon entreprise. Elle sert juste à
-        tester les fonctionnalités de la librairie Serwist.
+        C&apos;est une test app sur la librarie Serwist avant le développement
+        d&apos;une application en PWA pour une client de mon entreprise. Elle
+        sert juste à tester les fonctionnalités de la librairie Serwist.
       </p>
       <br />
 
