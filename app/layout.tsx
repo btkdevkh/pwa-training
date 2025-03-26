@@ -59,7 +59,7 @@ export default function RootLayout({
       >
         <AuthContextProvider>
           <Navbar />
-          <div className="container lg mx-auto px-4">{children}</div>
+          <div className="max-w-7xl mx-auto px-4">{children}</div>
 
           {/* Add the install prompt component */}
           <PwaInstallPrompt />
